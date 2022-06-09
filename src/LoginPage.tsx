@@ -146,6 +146,7 @@ export default function App() {
       {provider && profile && (
         <User  onLogout={onLogout} />
       )}
+      
       <div className={`App ${provider && profile ? "hide" : ""}`}>
         <h1 className="title">ReactJS Social Login</h1>
         <LoginSocialFacebook
