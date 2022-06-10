@@ -1,13 +1,12 @@
 import React from 'react';
-import './App.css';
-import LoginForm from './LoginPage';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import UploadFile from './UploadFile';
+
 
 
 function App() {
   return (
     <div className="App">
-    <LoginForm/>
+    <UploadFile/>
     </div>
   );
 }

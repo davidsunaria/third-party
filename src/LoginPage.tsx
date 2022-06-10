@@ -144,7 +144,7 @@ export default function App() {
       )} */}
 
       {provider && profile && (
-        <User  onLogout={onLogout} />
+        <User  provider={provider}  onLogout={onLogout} />
       )}
       
       <div className={`App ${provider && profile ? "hide" : ""}`}>

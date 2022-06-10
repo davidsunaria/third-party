@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 
 interface ILoginLogout{
-    onLogout : any
+    onLogout : any,
+    provider:string
 }
 
 function User({onLogout}:ILoginLogout) {
