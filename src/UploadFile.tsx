@@ -1,45 +1,59 @@
-import React, { useState } from "react";
-import { FileDrop } from "react-file-drop"
+import React, { useEffect, useState } from "react";
+import { FileDrop } from "react-file-drop";
+import { FileUploader } from "react-drag-drop-files";
 
-
-
-const UploadFile =() =>{
- 
+const UploadFile = () => {
   const styles = {
     border: "1px solid black",
     width: 600,
     color: "black",
     padding: 20,
-    height:300,
-    margin: "0 auto"
+    height: 200,
+    margin: "0 auto",
   };
-  const [img, setImg] = useState<any>();
-  const setData = (value:any,e:any)=>{
-    console.log("value",value[0]?.name)
-    setImg(window.URL.createObjectURL(value[0]?.name));
-    //console.log("e",e.target.files)
-  }
-      
-      return (
+  const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
+  const [file, setFile] = useState<string>();
+  const [imgArray, setImgArray] = useState<string[]>([]);
 
-        <div>
-        <h1>React File Drop demo</h1>
-        <div style={styles}>
-          <FileDrop
-            // onFrameDragEnter={(event) => console.log("onFrameDragEnter", event)}
-            // onFrameDragLeave={(event) => console.log("onFrameDragLeave", event)}
-            // onFrameDrop={(event) => console.log("onFrameDrop", event)}
-            // onDragOver={(event) => console.log("onDragOver", event)}
-            // onDragLeave={(event) => console.log("onDragLeave", event)}
-            onDrop={(files, event) => setData(files,event)}
-          >
-            Drop some files here!
-          </FileDrop>
-          <img src={img} alt="" />
-        </div>
+  const handleChange = (file: any) => {
+   //console.log(file.target.files)
+    setImgArray((_: string[]) => [..._, URL?.createObjectURL(file.target.files)]);
+  };
+
+  //console.log("imgArray", imgArray);
+  return (
+    <div>
+      <h1>React File Drop demo</h1>
+      <div style={styles}>
+        <input type={"file"}
+          multiple={true}
+          onChange={(e: any) => handleChange(e)}
+          name="file"
+        />
       </div>
+      <h4>Image Display here</h4>
+      {imgArray &&
+        imgArray?.length > 0 &&
+        imgArray.map((val: any, i: number) => {
+          return (
+            <>
+              <img
+                key={i}
+                src={val}
+                alt=""
+                height={300}
+                width={300}
+                className="mx-2"
+              />
+              <i
+                className="fa fa-remove"
+                style={{ fontSize: "48px", color: "red" }}
+              ></i>
+            </>
+          );
+        })}
+    </div>
+  );
+};
 
-      )
-}
-
-export default UploadFile
+export default UploadFile;
