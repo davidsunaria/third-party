@@ -11,16 +11,13 @@ const UploadFile = () => {
     height: 200,
     margin: "0 auto",
   };
-  const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
-  const [file, setFile] = useState<string>();
   const [imgArray, setImgArray] = useState<string[]>([]);
 
   const handleChange = (file: any) => {
-   //console.log(file.target.files)
-    setImgArray((_: string[]) => [..._, URL?.createObjectURL(file.target.files)]);
+    const result = Array.from(file?.target?.files).map((_: any) => (URL?.createObjectURL(_)))
+    setImgArray((_: any) => [..._, ...result]);
   };
 
-  //console.log("imgArray", imgArray);
   return (
     <div>
       <h1>React File Drop demo</h1>
