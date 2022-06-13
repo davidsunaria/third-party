@@ -14,26 +14,37 @@ const UploadFile = () => {
   const [imgArray, setImgArray] = useState<string[]>([]);
 
   const handleChange = (file: any) => {
-    const result = Array.from(file?.target?.files).map((_: any) => (URL?.createObjectURL(_)))
-    setImgArray((_: any) => [..._, ...result]);
+    const result = Array.from(file?.target?.files).map((_: any) =>
+      URL?.createObjectURL(_)
+    );
+    setImgArray((_: string[]) => [..._, ...result]);
   };
+
+  const deleteImg = (index:number) =>{
+    let newitem :string[]=[...imgArray]
+    newitem.splice(index,1)
+   setImgArray( newitem)
+  }
 
   return (
     <div>
       <h1>React File Drop demo</h1>
       <div style={styles}>
-        <input type={"file"}
+        <input
+          type={"file"}
           multiple={true}
           onChange={(e: any) => handleChange(e)}
           name="file"
         />
       </div>
       <h4>Image Display here</h4>
+     
       {imgArray &&
         imgArray?.length > 0 &&
         imgArray.map((val: any, i: number) => {
           return (
             <>
+            
               <img
                 key={i}
                 src={val}
@@ -42,10 +53,7 @@ const UploadFile = () => {
                 width={300}
                 className="mx-2"
               />
-              <i
-                className="fa fa-remove"
-                style={{ fontSize: "48px", color: "red" }}
-              ></i>
+              <button className="btn btn-sm btn-warning" onClick={()=>deleteImg(i)}>Delete</button>
             </>
           );
         })}
