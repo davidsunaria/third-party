@@ -15,9 +15,9 @@ const UploadFile = () => {
   const [file, setFile] = useState<string>();
   const [imgArray, setImgArray] = useState<string[]>([]);
 
-  const handleChange = (file: any) => {
-   //console.log(file.target.files)
-    setImgArray((_: string[]) => [..._, URL?.createObjectURL(file.target.files)]);
+  const handleChange = (file: Blob) => {
+    setImgArray((_: string[]) => [..._, URL?.createObjectURL(file)]); // standby of array push method
+    //no need to create empty array
   };
 
   //console.log("imgArray", imgArray);
@@ -25,10 +25,10 @@ const UploadFile = () => {
     <div>
       <h1>React File Drop demo</h1>
       <div style={styles}>
-        <input type={"file"}
-          multiple={true}
-          onChange={(e: any) => handleChange(e)}
+        <FileUploader
+          handleChange={handleChange}
           name="file"
+          types={fileTypes}
         />
       </div>
       <h4>Image Display here</h4>
